@@ -33,7 +33,7 @@ public class BoxMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("colidiu com " + collision.gameObject.name);
+        //print("colidiu com " + collision.gameObject.name);
         if (collision.gameObject.name == "PlayerArmature")
         {
             //Mata o jogador

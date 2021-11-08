@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RoadSystemSettings
   m_EditorClassIdentifier: 
   roadSettings:
-    drawBoundingBoxes: 0
+    drawBoundingBoxes: 1
     useRayCast: 1
-    copyHitNormal: 0
-    newRoadPrefab: {fileID: 0}
+    copyHitNormal: 1
+    newRoadPrefab: {fileID: 1075041822531538, guid: 6d54332e11f957a43984db1df5538f5b, type: 3}
   drawNavigatorDebug: 0
   drawNavigatorDebugPoints: 0
   autoCalculateNavigator: 0

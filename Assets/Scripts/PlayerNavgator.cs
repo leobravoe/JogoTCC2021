@@ -6,56 +6,40 @@ using UnityEngine.AI;
 public class PlayerNavgator : MonoBehaviour
 {
     NavMeshAgent nav;
-    public Transform backLeft;
-    public Transform backRight;
-    public Transform frontLeft;
-    public Transform frontRight;
-    private RaycastHit lr;
-    private RaycastHit rr;
-    private RaycastHit lf;
-    private RaycastHit rf;
-    private Vector3 upDir;
+    private NavMeshAgent agent;
+    private Quaternion lookRotation;
+
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        nav.updateRotation = false;          //< let us control the rotation explicitly
+        lookRotation = transform.rotation;     //< set original rotation
+    }
+
+    protected Vector3 GetTerrainNormal() {
+        RaycastHit hit;
+        Vector3 terrainLocalPos = transform.position;
+        Physics.Raycast(transform.position, Vector3.down, out hit, 2f, 1 << LayerMask.NameToLayer("Ground"));
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        return hit.normal;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Tenta ajustar a inclinação do modelo
-        Physics.Raycast(backLeft.position + Vector3.up, Vector3.down, out lr);
-        Physics.Raycast(backRight.position + Vector3.up, Vector3.down, out rr);
-        Physics.Raycast(frontLeft.position + Vector3.up, Vector3.down, out lf);
-        Physics.Raycast(frontRight.position + Vector3.up, Vector3.down, out rf);
-
-        upDir = (Vector3.Cross(rr.point - Vector3.up, lr.point - Vector3.up) +
-                 Vector3.Cross(lr.point - Vector3.up, lf.point - Vector3.up) +
-                 Vector3.Cross(lf.point - Vector3.up, rf.point - Vector3.up) +
-                 Vector3.Cross(rf.point - Vector3.up, rr.point - Vector3.up)
-                ).normalized;
-        Debug.DrawRay(rr.point, Vector3.up);
-        Debug.DrawRay(lr.point, Vector3.up);
-        Debug.DrawRay(lf.point, Vector3.up);
-        Debug.DrawRay(rf.point, Vector3.up);
-        Debug.DrawRay(transform.position, upDir);
-
-        transform.up = upDir;
-
-        print(upDir);
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-            {
-                nav.destination = hit.point;
-            }
+        Vector3 normal_v = GetTerrainNormal();
+        print(normal_v);
+        Vector3 direction = nav.steeringTarget - transform.position;
+        direction.y = 0.0f;
+        if (direction.magnitude > 0.1f && normal_v.magnitude > 0.1f) {
+            Quaternion qLook = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion qNorm = Quaternion.FromToRotation(Vector3.up, normal_v);
+            lookRotation = qNorm * qLook;
         }
+        // soften the orientation
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime / 0.2f);
     }
 }

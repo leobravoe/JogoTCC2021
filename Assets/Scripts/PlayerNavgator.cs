@@ -23,18 +23,17 @@ public class PlayerNavgator : MonoBehaviour
         RaycastHit hit;
         Vector3 terrainLocalPos = transform.position;
         Physics.Raycast(transform.position, Vector3.down, out hit, 2f, 1 << LayerMask.NameToLayer("Ground"));
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
         return hit.normal;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Vector3 normal_v = GetTerrainNormal();
         print(normal_v);
+        Debug.DrawRay(transform.position, normal_v, Color.yellow);
         Vector3 direction = nav.steeringTarget - transform.position;
         direction.y = 0.0f;
-        if (direction.magnitude > 0.1f && normal_v.magnitude > 0.1f) {
+        if (direction.magnitude > 0.1f || normal_v.magnitude > 0.1f) {
             Quaternion qLook = Quaternion.LookRotation(direction, Vector3.up);
             Quaternion qNorm = Quaternion.FromToRotation(Vector3.up, normal_v);
             lookRotation = qNorm * qLook;

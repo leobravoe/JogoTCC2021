@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: "Assets/_ProjectFiles/Scenes/Tela de In\xEDcio/TelaDeInicio.unity"
+    guid: 6cec155a216ebea4db807c8542a400f5
+  - enabled: 1
+    path: "Assets/_ProjectFiles/Scenes/Cen\xE1rios do Jogo/Interlagos.unity"
+    guid: 2cadb7dab7c6d57448a69c5217b36fed
   m_configObjects: {}

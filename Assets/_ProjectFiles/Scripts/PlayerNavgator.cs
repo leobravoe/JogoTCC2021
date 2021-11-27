@@ -8,6 +8,7 @@ public class PlayerNavgator : MonoBehaviour
     NavMeshAgent nav;
     private NavMeshAgent agent;
     private Quaternion lookRotation;
+    private float journeyLength;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +32,12 @@ public class PlayerNavgator : MonoBehaviour
         Vector3 normal_v = GetTerrainNormal();
         
         // Mostra a normal do terreno
-        print(normal_v);
+        ///print(normal_v);
         Debug.DrawRay(transform.position, normal_v, Color.yellow);
 
-        
+        transform.rotation = Quaternion.FromToRotation(transform.up, normal_v) * transform.rotation;
+
+        transform.LookAt(nav.destination);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(nav.destination - transform.position), 1.5f);
     }
 }

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MoveToNext : MonoBehaviour
 {
-    public GameObject next;
+
     // Start is called before the first frame update
     void Start()
     {
-        //print("teste");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,6 +19,7 @@ public class MoveToNext : MonoBehaviour
             UnityEngine.AI.NavMeshAgent nav = other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
             // Seto o destino como a posição do próximo objeto
             nav.destination = NextChild().position;
+            other.gameObject.GetComponent<PlayerNavgator>().indiceCaminho = this.transform.GetSiblingIndex() + 1;
         }
     }
 

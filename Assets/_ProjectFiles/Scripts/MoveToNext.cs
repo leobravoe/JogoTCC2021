@@ -17,9 +17,19 @@ public class MoveToNext : MonoBehaviour
         {
             // Pego a referência do NavMeshAgent dentro do objeto que colidiu e armazeno em "nav"
             UnityEngine.AI.NavMeshAgent nav = other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            // Seto o destino como a posição do próximo objeto
-            nav.destination = NextChild().position;
-            other.gameObject.GetComponent<PlayerNavgator>().indiceCaminho = this.transform.GetSiblingIndex() + 1;
+            if ( gameObject.transform.parent.name.Contains("Fantasma") && other.name.Contains("Fantasma") )
+            {
+                // Seto o destino como a posição do próximo objeto
+                nav.destination = NextChild().position;
+                other.gameObject.GetComponent<FantasmaNavgator>().indiceCaminho = this.transform.GetSiblingIndex() + 1;
+            }
+            if(!gameObject.transform.parent.name.Contains("Fantasma") && other.name.Contains("Player"))
+            {
+                // Seto o destino como a posição do próximo objeto
+                nav.destination = NextChild().position;
+                other.gameObject.GetComponent<PlayerNavgator>().indiceCaminho = this.transform.GetSiblingIndex() + 1;
+            }
+            
         }
     }
 

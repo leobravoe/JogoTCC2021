@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class FantasmaNavgator : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class FantasmaNavgator : MonoBehaviour
     private int _caminhoAtual = 0; // Índice que controla em qual pista o carro está
     public int indiceCaminho; // Índice que controla em qual ponto da pista o carro está (usado como referência para quando é necessário trocar de pista)
 
+    private float[] tuneList = new float[4];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +27,20 @@ public class FantasmaNavgator : MonoBehaviour
     IEnumerator CoroutineParaTrocaDePista() {
         while (true)
         {
-            //yield on a new YieldInstruction that waits for 2 seconds.
+            // Espera dois segundos
             yield return new WaitForSeconds(2);
 
-            // Calcula um numero aleatório
-            float numeroAleatorio = Random.Range(0f, 100.0f);
+            // Trocar de pista (usando a tonalidade do momento)
+            tuneList[0] = MusicManager.instance.getFrequenciesDiapason(0, 5, 10);
+            tuneList[1] = MusicManager.instance.getFrequenciesDiapason(5, 10, 100);
+            tuneList[2] = MusicManager.instance.getFrequenciesDiapason(10, 20, 200);
+            tuneList[3] = MusicManager.instance.getFrequenciesDiapason(20, 32, 1000);
 
-            if (numeroAleatorio < 25)
+            int position = Array.IndexOf(tuneList, Mathf.Max(tuneList));
+
+            Debug.Log("MAX: " + Mathf.Max(tuneList) + "position" + Array.IndexOf(tuneList, Mathf.Max(tuneList)));
+
+            if (position == 0)
             {
                 caminhoEsquerda.SetActive(true);
                 caminhoCentroEsquerda.SetActive(false);
@@ -38,7 +48,7 @@ public class FantasmaNavgator : MonoBehaviour
                 caminhoDireita.SetActive(false);
                 nav.destination = caminhoEsquerda.transform.GetChild(indiceCaminho).position;
             }
-            else if (numeroAleatorio >= 25 && numeroAleatorio < 50)
+            else if (position == 1)
             {
                 caminhoEsquerda.SetActive(false);
                 caminhoCentroEsquerda.SetActive(true);
@@ -46,7 +56,7 @@ public class FantasmaNavgator : MonoBehaviour
                 caminhoDireita.SetActive(false);
                 nav.destination = caminhoCentroEsquerda.transform.GetChild(indiceCaminho).position;
             }
-            else if (numeroAleatorio >= 50 && numeroAleatorio < 75)
+            else if (position == 2)
             {
                 caminhoEsquerda.SetActive(false);
                 caminhoCentroEsquerda.SetActive(false);
@@ -69,8 +79,6 @@ public class FantasmaNavgator : MonoBehaviour
     void Update()
     {
         
-
-
     }
 
 }

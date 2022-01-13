@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     public GameObject obj;
     public float timeToSpawn;
     private float currentTimeToSpawn;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,9 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         //SpawnObject();
+        //timeToSpawn = audioSource.GetSpectrumData()
 
-        if(currentTimeToSpawn > 0)
+        if (currentTimeToSpawn > 0)
         {
             currentTimeToSpawn -= Time.deltaTime;
 

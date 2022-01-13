@@ -6,9 +6,11 @@ using System.Linq;
 
 public class MusicManager : MonoBehaviour
 {
-    
-    //public static MusicManager instance;
-    //public float[] spectrumWidth;
+    public GameObject player;
+    public GameObject fantasma;
+    public static MusicManager instance;
+    public float[] spectrumWidth;
+    public GameObject playerMusicManager;
 
     AudioSource audioSource;
     AudioClip myClip;
@@ -17,8 +19,8 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //instance = this;
-        //spectrumWidth = new float[64];
+        instance = this;
+        spectrumWidth = new float[64];
 
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(GetAudioClip());
@@ -41,18 +43,33 @@ public class MusicManager : MonoBehaviour
                 audioSource.clip = myClip;
                 audioSource.Play();
                 Debug.Log("Tocando Musica...");
+
+                // Ativa o playerMusicManager
+                StartCoroutine(CoroutineParaAtivarOPlayerMusicManager());
+
+                player.SetActive(true);
+                fantasma.SetActive(true);
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator CoroutineParaAtivarOPlayerMusicManager()
     {
-        //audioSource.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
+        // Espera dois segundos
+        yield return new WaitForSeconds(2);
+
+        playerMusicManager.GetComponent<AudioSource>().clip = myClip;
+        playerMusicManager.GetComponent<AudioSource>().Play();
     }
 
-    /*public float getFrequenciesDiapason(int start, int end, int mult)
+
+        // Update is called once per frame
+    void Update()
+    {
+        audioSource.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
+    }
+
+    public float getFrequenciesDiapason(int start, int end, int mult)
     {
         return spectrumWidth.ToList().GetRange(start, end).Average() * mult;
-    }*/
+    }
 }

@@ -51,7 +51,7 @@ public class PlayerNavgator : MonoBehaviour
             distancia += Vector3.Distance(pathParaOFantasma.corners[i], pathParaOFantasma.corners[i + 1]);
             Debug.DrawLine(pathParaOFantasma.corners[i], pathParaOFantasma.corners[i + 1], Color.red);
         }
-        Debug.Log(distancia);
+        //Debug.Log(distancia);
         nav.speed = distancia / 40f * 15f;
 
 

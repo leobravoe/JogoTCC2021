@@ -29,7 +29,7 @@ public class MusicManager : MonoBehaviour
 
     IEnumerator GetAudioClip() //Pega a URL da música, faz download e toca dentro do jogo, tocando como AudioSource
     {
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("https://ytop1.net/pt/Thankyou?token=U2FsdGVkX19Gkjg3K96lKhLc9Y%2fy5PCUiyFgquUZt%2fMnGm3waZlR7lNPHlvblk94buNT7VI415nfR9XYR%2byzLhjw8WBIHPmVTQLOlbn3SV31K7TB3A9C39BB1EQxrB%2bxRgKDlHbJl2BSj5E7vji%2bETyu58sjazxvBy0oB4UQFQnDqXwjr8q4ye69oBMZOdAPBycCVgxRa%2fFtlMfcFuhpfTR7EYPRjNnK9x1SbTpPQMY%3d&s=youtube&id=&h=7986292408680756847", AudioType.MPEG))
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("https://ytop1.net/pt/Thankyou?token=U2FsdGVkX18RLQq2c7EniOVrkPEx9KAcmID%2bVVjXcSG8jQuY6eHKDADFt7O1FDscgET5qogA%2bUto3t6ORXHHciPhJ9wiaRVj8RSTIFArIaUqt2ccvcN1%2fSdcoPsBde904%2fBhgRSJofNeEPXeSWXdVl0yFvgUD2OZYk3SNM6jThVE1eXUFZfUoIo3ytM%2bLr%2bT&s=youtube&id=&h=7986292408680757838", AudioType.MPEG))
         {
             yield return www.SendWebRequest();
 

@@ -27,8 +27,8 @@ public class FantasmaNavgator : MonoBehaviour
     IEnumerator CoroutineParaTrocaDePista() {
         while (true)
         {
-            // Espera dois segundos
-            yield return new WaitForSeconds(2);
+            // Espera para trocar de pista
+            yield return new WaitForSeconds(1);
 
             // Trocar de pista (usando a tonalidade do momento)
             tuneList[0] = MusicManager.instance.getFrequenciesDiapason(0, 5, 10);
@@ -78,7 +78,7 @@ public class FantasmaNavgator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 }

@@ -15,9 +15,9 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioProcessor processor = FindObjectOfType<AudioProcessor>();
-        processor.onBeat.AddListener(onOnbeatDetected);
-        //processor.onSpectrum.AddListener(onSpectrum);
+        /*AudioProcessor processor = FindObjectOfType<AudioProcessor>();
+        processor.onOnbeatDetected.AddListener(onOnbeatDetected);
+        processor.onSpectrum.AddListener(onSpectrum);*/
     }
 
     void onOnbeatDetected()

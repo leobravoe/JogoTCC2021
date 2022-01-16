@@ -6,64 +6,35 @@ using System;
 
 public class Spawner : MonoBehaviour
 {
-    
-    //public List<Transform> objectsReactingToBasses, objectsReactingToNB, objectsReactingToMiddles, objectsReactingToHighs;
-    //[SerializeField] float t = 0.1f;
 
     public GameObject obj;
     public float timeToSpawn;
     private float currentTimeToSpawn;
     public AudioSource audioSource;
-    //private float[] tuneList = new float[4];
 
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(CoroutineParaSpawnar());
+        AudioProcessor processor = FindObjectOfType<AudioProcessor>();
+        processor.onBeat.AddListener(onOnbeatDetected);
+        //processor.onSpectrum.AddListener(onSpectrum);
     }
 
-    /*IEnumerator CoroutineParaSpawnar()
+    void onOnbeatDetected()
     {
-        while (true)
+        Debug.Log("Beat!!!");
+    }
+
+    /*void onSpectrum(float[] spectrum)
+    {
+        //The spectrum is logarithmically averaged
+        //to 12 bands
+
+        for (int i = 0; i < spectrum.Length; ++i)
         {
-            // Espera para spawnar
-            yield return new WaitForSeconds(0.2);
-
-            // Trocar de pista (usando a tonalidade do momento)
-            tuneList[0] = MusicManager.instance.getFrequenciesDiapason(0, 5, 10);
-            tuneList[1] = MusicManager.instance.getFrequenciesDiapason(5, 10, 100);
-            tuneList[2] = MusicManager.instance.getFrequenciesDiapason(10, 20, 200);
-            tuneList[3] = MusicManager.instance.getFrequenciesDiapason(20, 32, 1000);
-
-            int position = Array.IndexOf(tuneList, Mathf.Max(tuneList));
-
-            if (position == 0)
-            {
-                if (tuneList[0] >= 4) {
-                    SpawnObject();
-                }
-            }
-            else if (position == 1)
-            {
-                if (tuneList[1] >= 8)
-                {
-                    SpawnObject();
-                }
-            }
-            else if (position == 2)
-            {
-                if (tuneList[2] >= 15)
-                {
-                    SpawnObject();
-                }
-            }
-            else
-            {
-                if (tuneList[3] >= 25)
-                {
-                    SpawnObject();
-                }
-            }
+            Vector3 start = new Vector3(i, 0, 0);
+            Vector3 end = new Vector3(i, spectrum[i], 0);
+            Debug.DrawLine(start, end);
         }
     }*/
 

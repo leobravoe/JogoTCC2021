@@ -45710,6 +45710,7 @@ GameObject:
   - component: {fileID: 974925191}
   - component: {fileID: 974925193}
   - component: {fileID: 974925192}
+  - component: {fileID: 974925194}
   m_Layer: 0
   m_Name: MusicManagerFantasma
   m_TagString: Untagged
@@ -45844,6 +45845,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &974925194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974925190}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a5cfa443fecb549bb4cb12dd7380d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  bufferSize: 1024
+  gThresh: 0.1
+  onBeat:
+    m_PersistentCalls:
+      m_Calls: []
+  onSpectrum:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &975247808
 PrefabInstance:
   m_ObjectHideFlags: 0

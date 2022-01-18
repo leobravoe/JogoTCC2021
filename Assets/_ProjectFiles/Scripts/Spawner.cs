@@ -7,9 +7,12 @@ using System;
 public class Spawner : MonoBehaviour
 {
 
-    public GameObject obj;
-    public float timeToSpawn;
-    private float currentTimeToSpawn;
+    public GameObject ponto;
+    public GameObject obstaculo;
+    public float timeToSpawnPonto;
+    private float currentTimeToSpawnPonto;
+    public float timeToSpawnObst;
+    private float currentTimeToSpawnObst;
     public AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -41,41 +44,36 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //SpawnObject();
-        //timeToSpawn = audioSource.GetSpectrumData()
-
-       if (currentTimeToSpawn > 0)
+       if (currentTimeToSpawnPonto > 0) //Spawna Pontos
         {
-            currentTimeToSpawn -= Time.deltaTime;
+            currentTimeToSpawnPonto -= Time.deltaTime;
 
         }
         else
         {
-            SpawnObject();
-            currentTimeToSpawn = timeToSpawn;
+            SpawnPonto();
+            currentTimeToSpawnPonto = timeToSpawnPonto;
+        }
+
+        if (currentTimeToSpawnObst > 0) //Spawna Obstaculos
+        {
+            currentTimeToSpawnObst -= Time.deltaTime;
+
+        }
+        else
+        {
+            SpawnObstaculo();
+            currentTimeToSpawnObst = timeToSpawnObst;
         }
     }
 
-    public void SpawnObject()
+    public void SpawnPonto()
     {
-        Instantiate(obj, transform.position, transform.rotation);
+        Instantiate(ponto, transform.position, transform.rotation);
+    }
 
-        //Código abaixo para alterar o objeto de acordo com o tom (esse altera escala de objeto, temos que alterar para fazer spawnar os pontos)
-        /*foreach (Transform obj in objectsReactingToBasses)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(0, 7, 10), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToNB)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(7, 15, 100), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToMiddles)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(15, 30, 200), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToHighs)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(30, 32, 1000), 1), t);
-        }*/
+    public void SpawnObstaculo()
+    {
+        Instantiate(obstaculo, transform.position, transform.rotation);
     }
 }

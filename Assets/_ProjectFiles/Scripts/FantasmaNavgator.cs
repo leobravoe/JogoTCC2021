@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
@@ -38,7 +37,7 @@ public class FantasmaNavgator : MonoBehaviour
 
             int position = Array.IndexOf(tuneList, Mathf.Max(tuneList));
 
-            Debug.Log("MAX: " + Mathf.Max(tuneList) + "position" + Array.IndexOf(tuneList, Mathf.Max(tuneList)));
+            //Debug.Log("MAX: " + Mathf.Max(tuneList) + "position" + Array.IndexOf(tuneList, Mathf.Max(tuneList)));
 
             if (position == 0)
             {

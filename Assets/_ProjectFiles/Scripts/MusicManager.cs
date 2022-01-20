@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     public GameObject fantasma;
     public static MusicManager instance;
     public float[] spectrumWidth;
-    public GameObject playerMusicManager;
+    public AudioSource playerMusicManagerAudioSource;
 
     private bool mudando;
     private float pitchOriginal;
@@ -58,24 +58,15 @@ public class MusicManager : MonoBehaviour
             {
                 myClip = DownloadHandlerAudioClip.GetContent(www);
                 audioSource.clip = myClip;
+                playerMusicManagerAudioSource.clip = myClip;
                 audioSource.Play();
-                Debug.Log("Tocando Musica...");
-
-                // Ativa o playerMusicManager
-                StartCoroutine(CoroutineParaAtivarOPlayerMusicManager());
+                playerMusicManagerAudioSource.Stop();
+                Debug.Log("Tocando Musica no Fantasma...");
 
                 player.SetActive(true);
                 fantasma.SetActive(true);
             }
         }
-    }
-    IEnumerator CoroutineParaAtivarOPlayerMusicManager()
-    {
-        // Espera dois segundos
-        yield return new WaitForSeconds(2.3f);
-
-        playerMusicManager.GetComponent<AudioSource>().clip = myClip;
-        playerMusicManager.GetComponent<AudioSource>().Play();
     }
 
 

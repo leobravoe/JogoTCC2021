@@ -26,7 +26,7 @@ public class FollowCameraFinal : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstaculo"))
         {
-            DoShake();
+            //DoShake();
         }
     }
 
@@ -54,12 +54,12 @@ public class FollowCameraFinal : MonoBehaviour
     }
 
     public void DoShake()
-{
-OriginalPos = transform.position;
-OriginalRot = transform.rotation;
+    {
+        OriginalPos = transform.position;
+        OriginalRot = transform.rotation;
 
-ShakeIntensity = 1.6f;
-ShakeDecay = 0.02f;
-Shaking = true;
-} 
+        ShakeIntensity = 1.6f;
+        ShakeDecay = 0.02f;
+        Shaking = true;
+    } 
 }

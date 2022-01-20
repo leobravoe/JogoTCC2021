@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     public GameObject ponto;
     public GameObject obstaculo;
+    //public GameObject triggerParaInícioDaMusica;
     public float timeToSpawnObst;
     private float currentTimeToSpawnObst;
 
@@ -21,7 +22,12 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     public void onOnbeatDetected()
     {
-        Debug.Log("Beat!!!");
+        //Debug.Log("Beat!!!");
+        //if(triggerParaInícioDaMusica != null)
+        //{
+        //    Instantiate(triggerParaInícioDaMusica, transform.position, transform.rotation);
+        //    triggerParaInícioDaMusica = null;
+        //}
         SpawnPonto();
     }
 
@@ -31,7 +37,7 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (currentTimeToSpawnObst > 0)
         {

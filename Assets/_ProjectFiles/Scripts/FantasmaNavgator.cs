@@ -28,7 +28,7 @@ public class FantasmaNavgator : MonoBehaviour
         while (true)
         {
             // Espera para trocar de pista
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
 
             // Trocar de pista (usando a tonalidade do momento)
             tuneList[0] = MusicManager.instance.getFrequenciesDiapason(0, 5, 10);

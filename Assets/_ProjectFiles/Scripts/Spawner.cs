@@ -4,78 +4,54 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 {
 
-    public GameObject obj;
-    public float timeToSpawn;
-    private float currentTimeToSpawn;
-    public AudioSource audioSource;
+    public GameObject ponto;
+    public GameObject obstaculo;
+    public float timeToSpawnObst;
+    private float currentTimeToSpawnObst;
 
     // Start is called before the first frame update
     void Start()
     {
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
-        processor.onBeat.AddListener(onOnbeatDetected);
-        //processor.onSpectrum.AddListener(onSpectrum);
+        processor.addAudioCallback(this);
     }
 
-    void onOnbeatDetected()
+    public void onOnbeatDetected()
     {
         Debug.Log("Beat!!!");
+        SpawnPonto();
     }
 
-    /*void onSpectrum(float[] spectrum)
+    public void onSpectrum(float[] spectrum)
     {
-        //The spectrum is logarithmically averaged
-        //to 12 bands
 
-        for (int i = 0; i < spectrum.Length; ++i)
-        {
-            Vector3 start = new Vector3(i, 0, 0);
-            Vector3 end = new Vector3(i, spectrum[i], 0);
-            Debug.DrawLine(start, end);
-        }
-    }*/
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //SpawnObject();
-        //timeToSpawn = audioSource.GetSpectrumData()
-
-       if (currentTimeToSpawn > 0)
+        if (currentTimeToSpawnObst > 0)
         {
-            currentTimeToSpawn -= Time.deltaTime;
+            currentTimeToSpawnObst -= Time.deltaTime;
 
         }
         else
         {
-            SpawnObject();
-            currentTimeToSpawn = timeToSpawn;
+            SpawnObstaculo();
+            currentTimeToSpawnObst = timeToSpawnObst;
         }
     }
 
-    public void SpawnObject()
+    public void SpawnPonto()
     {
-        Instantiate(obj, transform.position, transform.rotation);
+        Instantiate(ponto, transform.position, transform.rotation);
+    }
 
-        //Código abaixo para alterar o objeto de acordo com o tom (esse altera escala de objeto, temos que alterar para fazer spawnar os pontos)
-        /*foreach (Transform obj in objectsReactingToBasses)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(0, 7, 10), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToNB)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(7, 15, 100), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToMiddles)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(15, 30, 200), 1), t);
-        }
-        foreach (Transform obj in objectsReactingToHighs)
-        {
-            obj.localScale = Vector3.Lerp(obj.localScale, new Vector3(1, MusicManager.instance.getFrequenciesDiapason(30, 32, 1000), 1), t);
-        }*/
+    public void SpawnObstaculo()
+    {
+        Instantiate(obstaculo, transform.position, transform.rotation);
     }
 }

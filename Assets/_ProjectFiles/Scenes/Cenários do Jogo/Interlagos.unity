@@ -45852,13 +45852,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974925190}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2a5cfa443fecb549bb4cb12dd7380d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 974925193}
   bufferSize: 1024
-  gThresh: 0.1
+  gThresh: 5
 --- !u!1001 &975247808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86799,10 +86800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1351424043}
   score: 0
-  camTransform: {fileID: 963194228}
-  shakeDuration: 0
-  shakeAmount: 0.7
-  decreaseFactor: 1
 --- !u!1 &1831342399
 GameObject:
   m_ObjectHideFlags: 0
@@ -99075,9 +99072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ponto: {fileID: 1954576134}
   obstaculo: {fileID: 1672867475}
-  timeToSpawnPonto: 1
-  timeToSpawnObst: 4.3
-  audioSource: {fileID: 974925193}
+  timeToSpawnObst: 4
 --- !u!1 &2124905915
 GameObject:
   m_ObjectHideFlags: 0

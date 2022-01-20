@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AudioProcessor : MonoBehaviour
 {
 
-    private AudioSource source;
+    public AudioSource source;
 
     private long lastT, nowT, diff, entries, sum;
 
@@ -210,7 +210,7 @@ public class AudioProcessor : MonoBehaviour
                     {
                         foreach (AudioCallbacks callback in callbacks)
                         {
-                            callback.onOnbeatDetected();
+                            callback.onOnbeatDetected();               
                         }
                     }
                     blipDelay[0] = 1;
@@ -227,22 +227,6 @@ public class AudioProcessor : MonoBehaviour
             //Debug.Log(System.Math.Round(60 / (tempopd * framePeriod)) + " bpm");
             //Debug.Log(System.Math.Round(auco.avgBpm()) + " bpm");
         }
-    }
-
-    public void changeCameraColor()
-    {
-        //Debug.Log("camera");
-        float r = Random.Range(0f, 1f);
-        float g = Random.Range(0f, 1f);
-        float b = Random.Range(0f, 1f);
-
-        //Debug.Log(r + "," + g + "," + b);
-        Color color = new Color(r, g, b);
-
-        GetComponent<Camera>().clearFlags = CameraClearFlags.Color;
-        Camera.main.backgroundColor = color;
-
-        //camera.backgroundColor = color;
     }
 
     public float getBandWidth()

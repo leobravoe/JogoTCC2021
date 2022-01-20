@@ -4,58 +4,36 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 {
 
     public GameObject ponto;
     public GameObject obstaculo;
-    public float timeToSpawnPonto;
-    private float currentTimeToSpawnPonto;
     public float timeToSpawnObst;
     private float currentTimeToSpawnObst;
-    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        /*AudioProcessor processor = FindObjectOfType<AudioProcessor>();
-        processor.onOnbeatDetected.AddListener(onOnbeatDetected);
-        processor.onSpectrum.AddListener(onSpectrum);*/
+        AudioProcessor processor = FindObjectOfType<AudioProcessor>();
+        processor.addAudioCallback(this);
     }
 
-    void onOnbeatDetected()
+    public void onOnbeatDetected()
     {
         Debug.Log("Beat!!!");
+        SpawnPonto();
     }
 
-    /*void onSpectrum(float[] spectrum)
+    public void onSpectrum(float[] spectrum)
     {
-        //The spectrum is logarithmically averaged
-        //to 12 bands
 
-        for (int i = 0; i < spectrum.Length; ++i)
-        {
-            Vector3 start = new Vector3(i, 0, 0);
-            Vector3 end = new Vector3(i, spectrum[i], 0);
-            Debug.DrawLine(start, end);
-        }
-    }*/
+    }
 
     // Update is called once per frame
     void Update()
     {
-       if (currentTimeToSpawnPonto > 0) //Spawna Pontos
-        {
-            currentTimeToSpawnPonto -= Time.deltaTime;
-
-        }
-        else
-        {
-            SpawnPonto();
-            currentTimeToSpawnPonto = timeToSpawnPonto;
-        }
-
-        if (currentTimeToSpawnObst > 0) //Spawna Obstaculos
+        if (currentTimeToSpawnObst > 0)
         {
             currentTimeToSpawnObst -= Time.deltaTime;
 

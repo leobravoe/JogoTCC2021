@@ -45265,8 +45265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1278655277}
-  x_scale: 15
-  y_scale: 20
+  x_scale: 10
+  y_scale: 12
   smoothTime: 0.6
 --- !u!1001 &963768254
 PrefabInstance:
@@ -52241,7 +52241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277847066457831334, guid: d3efa610011362941877aab5651f00ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 495.44
+      value: 495.69
       objectReference: {fileID: 0}
     - target: {fileID: 7277847066457831334, guid: d3efa610011362941877aab5651f00ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -52249,7 +52249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277847066457831334, guid: d3efa610011362941877aab5651f00ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 229.09
+      value: 229.11
       objectReference: {fileID: 0}
     - target: {fileID: 7277847066457831334, guid: d3efa610011362941877aab5651f00ca, type: 3}
       propertyPath: m_LocalRotation.w

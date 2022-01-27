@@ -31,13 +31,13 @@ public class PegaPontos : MonoBehaviour
 
         if (other.gameObject.CompareTag("Obstaculo"))
         {
-            if (score <= 5)
+            if (score <= 10)
             {
                 score = 0;
             }
             else
             {
-                score -= 5;
+                score -= 10;
             }
                 scoreText.GetComponent<Text>().text = "x" + score;
                 Destroy(other.gameObject);

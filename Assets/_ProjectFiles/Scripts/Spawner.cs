@@ -9,9 +9,6 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     public GameObject ponto;
     public GameObject obstaculo;
-    //public GameObject triggerParaInícioDaMusica;
-    public float timeToSpawnObst;
-    private float currentTimeToSpawnObst;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +19,16 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     public void onOnbeatDetected()
     {
-        //Debug.Log("Beat!!!");
-        //if(triggerParaInícioDaMusica != null)
-        //{
-        //    Instantiate(triggerParaInícioDaMusica, transform.position, transform.rotation);
-        //    triggerParaInícioDaMusica = null;
-        //}
-        SpawnPonto();
+        float num = UnityEngine.Random.Range(1, 10);
+        if (num <= 2)
+        {
+            SpawnObstaculo();
+        }
+        else
+        {
+            SpawnPonto();
+        }
+        
     }
 
     public void onSpectrum(float[] spectrum)
@@ -37,18 +37,9 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (currentTimeToSpawnObst > 0)
-        {
-            currentTimeToSpawnObst -= Time.deltaTime;
-
-        }
-        else
-        {
-            SpawnObstaculo();
-            currentTimeToSpawnObst = timeToSpawnObst;
-        }
+ 
     }
 
     public void SpawnPonto()

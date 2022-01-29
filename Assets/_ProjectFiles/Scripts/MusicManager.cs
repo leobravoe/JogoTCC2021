@@ -10,7 +10,6 @@ public class MusicManager : MonoBehaviour
     public GameObject fantasma;
     public static MusicManager instance;
     public float[] spectrumWidth;
-    public AudioSource playerMusicManagerAudioSource;
 
     private bool mudando;
     private float pitchOriginal;
@@ -58,9 +57,9 @@ public class MusicManager : MonoBehaviour
             {
                 myClip = DownloadHandlerAudioClip.GetContent(www);
                 audioSource.clip = myClip;
-                playerMusicManagerAudioSource.clip = myClip;
+                player.GetComponent<AudioSource>().clip = myClip;
                 audioSource.Play();
-                playerMusicManagerAudioSource.Stop();
+                player.GetComponent<AudioSource>().Stop();
                 Debug.Log("Tocando Musica no Fantasma...");
 
                 player.SetActive(true);
@@ -74,6 +73,13 @@ public class MusicManager : MonoBehaviour
     void Update()
     {
         audioSource.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
+
+        Debug.Log("Tempo musica" + audioSource.time);
+        Debug.Log("Final" + myClip.length);
+        if ( audioSource.time >= myClip.length){
+            Destroy(fantasma);
+        }
+        
 
         /*while (playerMusicManager.GetComponent<AudioSource>().pitch > pitchMin)
         {

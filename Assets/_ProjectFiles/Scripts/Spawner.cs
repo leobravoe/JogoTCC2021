@@ -44,11 +44,29 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     public void SpawnPonto()
     {
-        Instantiate(ponto, transform.position, transform.rotation);
+        // Quando for realizar um spawn de um ponto, verifica se na região existe um Obstaculo. Caso exista um obstaculo, o ponto não será criado.
+        RaycastHit[] objetosEmVolta;
+        int i;
+        objetosEmVolta = Physics.SphereCastAll(transform.position, 1.0f, transform.forward, Mathf.Infinity);
+        //Debug.Log(objetosEmVolta);
+        for (i = 0; i < objetosEmVolta.Length && objetosEmVolta[i].collider.tag != "Obstaculo"; i++) { }
+
+        // Se não existir objetos com a tag "Obstaculo" em volta
+        if (i == objetosEmVolta.Length)
+            Instantiate(ponto, transform.position, transform.rotation);
     }
 
     public void SpawnObstaculo()
     {
-        Instantiate(obstaculo, transform.position, transform.rotation);
+        // Quando for realizar um spawn de um obstáculo, verifica se na região existe um ponto. Caso exista um ponto, o obstáculo não será criado.
+        RaycastHit [] objetosEmVolta;
+        int i;
+        objetosEmVolta = Physics.SphereCastAll(transform.position, 1.0f, transform.forward, Mathf.Infinity);
+        //Debug.Log(objetosEmVolta);
+        for (i = 0; i < objetosEmVolta.Length && objetosEmVolta[i].collider.tag != "Ponto"; i++){}
+        
+        // Se não existir objetos com a tag "Ponto" em volta
+        if(i == objetosEmVolta.Length)
+            Instantiate(obstaculo, transform.position, transform.rotation);
     }
 }

@@ -42,8 +42,8 @@ public class PegaPontos : MonoBehaviour
                 scoreText.GetComponent<Text>().text = "x" + score;
                 Destroy(other.gameObject);
 
-                GameObject.Find("Main Camera").SendMessage("DoShake");
-                GameObject.Find("MusicManagerFantasma").SendMessage("MudaPitch");
+                GameObject.Find("Main Camera").SendMessage("DoShake"); //Manda uma mensagem para a MainCamera para iniciar o método DoShake
+                GameObject.Find("MusicManagerFantasma").SendMessage("SomErro");//Manda uma mensagem para o MusicManager para iniciar o método SomErro
 
 
         }

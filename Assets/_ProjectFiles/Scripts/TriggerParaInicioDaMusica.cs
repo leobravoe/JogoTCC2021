@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TriggerParaInicioDaMusica : MonoBehaviour
 {
-    //public AudioSource playerMusicManagerAudioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +14,8 @@ public class TriggerParaInicioDaMusica : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Music Start");
+            Debug.Log("Tocando Música no Player...");
             other.GetComponent<AudioSource>().Play();
-            //playerMusicManagerAudioSource.Play();
         }
     }
 }

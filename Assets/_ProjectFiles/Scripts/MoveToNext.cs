@@ -36,16 +36,16 @@ public class MoveToNext : MonoBehaviour
     // Update is called once per frame
     private Transform NextChild()
     {
-        // Check where we are
+        //Checa onde o veículo está
         int thisIndex = this.transform.GetSiblingIndex();
 
-        // We have a few cases to rule out
+        
         if (this.transform.parent == null)
             return null;
         if (this.transform.parent.childCount <= thisIndex + 1)
             return this.transform.parent.GetChild(0);
 
-        // Then return whatever was next, now that we're sure it's there
+        //Retorna o próiximo nodo de Pathfinding
         return this.transform.parent.GetChild(thisIndex + 1);
     }
 }

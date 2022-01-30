@@ -12,11 +12,6 @@ public class MusicManager : MonoBehaviour
     public float[] spectrumWidth;
     public AudioSource playerMusicManagerAudioSource;
 
-    private bool mudando;
-    private float pitchOriginal;
-    private float tempoPraMudar;
-    private float pitchMin;
-
     AudioSource audioSource;
     AudioClip myClip;
     public Spawner spawner;
@@ -30,18 +25,6 @@ public class MusicManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(GetAudioClip());
         Debug.Log("Downloading Audio...");
-
-        //playerMusicManager.GetComponent<AudioSource>().pitch = pitchOriginal;
-        //mudando = false;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Obstaculo"))
-        {
-            //MudaPitch();
-            Debug.Log("Mudar Pitch");
-        }
     }
 
     IEnumerator GetAudioClip() //Pega a URL da música, faz download e toca dentro do jogo, tocando como AudioSource
@@ -74,18 +57,6 @@ public class MusicManager : MonoBehaviour
     void Update()
     {
         audioSource.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
-
-        /*while (playerMusicManager.GetComponent<AudioSource>().pitch > pitchMin)
-        {
-            playerMusicManager.GetComponent<AudioSource>().pitch -= Time.deltaTime * pitchOriginal / tempoPraMudar;
-        }
-
-        while (playerMusicManager.GetComponent<AudioSource>().pitch == pitchOriginal)
-        {
-            playerMusicManager.GetComponent<AudioSource>().pitch += Time.deltaTime * pitchOriginal / tempoPraMudar;
-        }
-
-        mudando = false;*/
     }
 
     public float getFrequenciesDiapason(int start, int end, int mult)
@@ -93,12 +64,9 @@ public class MusicManager : MonoBehaviour
         return spectrumWidth.ToList().GetRange(start, end).Average() * mult;
     }
 
-    public void MudaPitch()
+    public void SomErro()
     {
-        pitchOriginal = 1;
-        tempoPraMudar = 2;
-        pitchMin = 0.3f;
-        mudando = true;
+        
     }
 }
 

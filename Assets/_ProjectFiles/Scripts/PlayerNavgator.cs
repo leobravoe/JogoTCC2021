@@ -26,7 +26,7 @@ public class PlayerNavgator : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        nav.updateRotation = false;          //< let us control the rotation explicitly
+        nav.updateRotation = false;          //Controla a rotação do carro
         pathParaOFantasma = new NavMeshPath(); // Inicializa o Path entre o carro e o fantasma
     }
 
@@ -40,7 +40,7 @@ public class PlayerNavgator : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        ProcessaApertoDeTela();
+        ProcessaApertoDeTecla();
 
         // Controle da distância entre o Fantasma e o carro
         NavMesh.CalculatePath(transform.position, fantasma.transform.position, NavMesh.AllAreas, pathParaOFantasma);
@@ -51,24 +51,20 @@ public class PlayerNavgator : MonoBehaviour
             distancia += Vector3.Distance(pathParaOFantasma.corners[i], pathParaOFantasma.corners[i + 1]);
             Debug.DrawLine(pathParaOFantasma.corners[i], pathParaOFantasma.corners[i + 1], Color.red);
         }
-        //Debug.Log(distancia);
         nav.speed = distancia / 40f * 15f;
 
 
         Vector3 normal_v = GetTerrainNormal();
         
         // Mostra a normal do terreno
-        ///print(normal_v);
         Debug.DrawRay(transform.position, normal_v, Color.yellow);
 
-        //transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, (Quaternion.FromToRotation(transform.up, normal_v) * transform.rotation).eulerAngles, ref velocity, smoothTime));
         transform.rotation = Quaternion.FromToRotation(transform.up, normal_v) * transform.rotation;
 
         transform.LookAt(nav.destination);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(nav.destination - transform.position), 1.5f);
     }
 
-    private void ProcessaApertoDeTela()
+    private void ProcessaApertoDeTecla()
     {
         if (Input.GetKeyDown("left") && _caminhoAtual > 0)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowCameraFinal : MonoBehaviour
 {
-    public Transform target;
+    public Transform target; //Target referencia o carro
     public float x_scale = 5f;
     public float y_scale = 5f;
     public float smoothTime = 0.3F;
@@ -22,17 +22,10 @@ public class FollowCameraFinal : MonoBehaviour
         Shaking = false;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Obstaculo"))
-        {
-            //DoShake();
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
+        //Método para aleatorização do movimento de câmera
         if (ShakeIntensity > 0)
         {
             transform.position = OriginalPos + Random.insideUnitSphere * ShakeIntensity;
@@ -49,7 +42,6 @@ public class FollowCameraFinal : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, (target.position - target.forward * x_scale) + Vector3.up * y_scale, ref velocity, smoothTime);
-        //transform.position = (target.position - target.forward*x_scale) + Vector3.up*y_scale;
         transform.LookAt(target);
     }
 

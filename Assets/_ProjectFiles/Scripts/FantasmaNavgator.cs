@@ -37,8 +37,6 @@ public class FantasmaNavgator : MonoBehaviour
 
             int position = Array.IndexOf(tuneList, Mathf.Max(tuneList));
 
-            //Debug.Log("MAX: " + Mathf.Max(tuneList) + "position" + Array.IndexOf(tuneList, Mathf.Max(tuneList)));
-
             if (position == 0)
             {
                 caminhoEsquerda.SetActive(true);

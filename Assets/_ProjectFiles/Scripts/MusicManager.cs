@@ -16,9 +16,8 @@ public class MusicManager : MonoBehaviour
     private float tempoPraMudar;
     private float pitchMin;
 
-    AudioSource audioSource;
-    AudioClip myClip;
-    public Spawner spawner;
+    AudioSource audioSourceFantasma;
+    AudioClip myClipFantasma;
 
     // Start is called before the first frame update
     void Start()
@@ -26,21 +25,12 @@ public class MusicManager : MonoBehaviour
         instance = this;
         spectrumWidth = new float[64];
 
-        audioSource = GetComponent<AudioSource>();
+        audioSourceFantasma = GetComponent<AudioSource>();
         StartCoroutine(GetAudioClip());
         Debug.Log("Downloading Audio...");
 
         //playerMusicManager.GetComponent<AudioSource>().pitch = pitchOriginal;
         //mudando = false;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Obstaculo"))
-        {
-            //MudaPitch();
-            Debug.Log("Mudar Pitch");
-        }
     }
 
     IEnumerator GetAudioClip() //Pega a URL da música, faz download e toca dentro do jogo, tocando como AudioSource
@@ -55,10 +45,10 @@ public class MusicManager : MonoBehaviour
             }
             else
             {
-                myClip = DownloadHandlerAudioClip.GetContent(www);
-                audioSource.clip = myClip;
-                player.GetComponent<AudioSource>().clip = myClip;
-                audioSource.Play();
+                myClipFantasma = DownloadHandlerAudioClip.GetContent(www);
+                audioSourceFantasma.clip = myClipFantasma;
+                player.GetComponent<AudioSource>().clip = myClipFantasma;
+                audioSourceFantasma.Play();
                 player.GetComponent<AudioSource>().Stop();
                 Debug.Log("Tocando Musica no Fantasma...");
 
@@ -72,11 +62,11 @@ public class MusicManager : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-        audioSource.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
+        audioSourceFantasma.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
 
-        Debug.Log("Tempo musica" + audioSource.time);
-        Debug.Log("Final" + myClip.length);
-        if ( audioSource.time >= myClip.length){
+        Debug.Log("Tempo musica" + audioSourceFantasma.time);
+        Debug.Log("Final" + myClipFantasma.length);
+        if ( audioSourceFantasma.time >= myClipFantasma.length){
             Destroy(fantasma);
         }
         

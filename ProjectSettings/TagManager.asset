@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ponto
   - Obstaculo
+  - TriggerInicio
   layers:
   - Default
   - TransparentFX

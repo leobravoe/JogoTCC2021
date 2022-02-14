@@ -47,5 +47,9 @@ public class PegaPontos : MonoBehaviour
 
 
         }
+        if (other.gameObject.CompareTag("TriggerInicio"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

@@ -17,5 +17,6 @@ public class TriggerParaInicioDaMusica : MonoBehaviour
             Debug.Log("Tocando Música no Player...");
             other.GetComponent<AudioSource>().Play();
         }
+        
     }
 }

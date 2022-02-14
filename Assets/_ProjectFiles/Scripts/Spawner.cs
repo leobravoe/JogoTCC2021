@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
     public GameObject ponto;
     public GameObject obstaculo;
 
+    //public float delay = 1f;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -62,13 +62,18 @@ public class MusicManager : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-        audioSourceFantasma.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
+        if(audioSourceFantasma && myClipFantasma)
+        {
+            audioSourceFantasma.GetSpectrumData(spectrumWidth, 0, FFTWindow.Blackman); //GetSpectrumData retorna os dados de frequências da música
 
-        Debug.Log("Tempo musica" + audioSourceFantasma.time);
-        Debug.Log("Final" + myClipFantasma.length);
-        if ( audioSourceFantasma.time >= myClipFantasma.length){
-            Destroy(fantasma);
+            Debug.Log("Tempo musica" + audioSourceFantasma.time);
+            Debug.Log("Final" + myClipFantasma.length);
+            if (audioSourceFantasma.time >= myClipFantasma.length)
+            {
+                audioSourceFantasma.mute = true;
+            }
         }
+        
         
 
         /*while (playerMusicManager.GetComponent<AudioSource>().pitch > pitchMin)

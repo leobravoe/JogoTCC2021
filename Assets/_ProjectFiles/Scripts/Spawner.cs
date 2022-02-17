@@ -55,7 +55,10 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
 
         // Se não existir objetos com a tag "Obstaculo" em volta
         if (i == objetosEmVolta.Length)
-            Instantiate(ponto, transform.position, transform.rotation);
+        {
+            Destroy(Instantiate(ponto, transform.position + new Vector3(0f, 1f, 0f), ponto.transform.rotation), 20);
+        }
+            
     }
 
     public void SpawnObstaculo()
@@ -69,6 +72,9 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
         
         // Se não existir objetos com a tag "Ponto" em volta
         if(i == objetosEmVolta.Length)
-            Instantiate(obstaculo, transform.position, transform.rotation);
+        {
+            Destroy(Instantiate(obstaculo, transform.position + new Vector3(0f, 1f, 0f), transform.rotation), 20);
+        }
+            
     }
 }

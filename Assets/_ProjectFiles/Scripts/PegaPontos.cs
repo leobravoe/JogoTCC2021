@@ -43,8 +43,6 @@ public class PegaPontos : MonoBehaviour
                 Destroy(other.gameObject);
 
                 GameObject.Find("Main Camera").SendMessage("DoShake"); //Manda uma mensagem para a MainCamera para iniciar o método DoShake
-                GameObject.Find("MusicManagerFantasma").SendMessage("SomErro");//Manda uma mensagem para o MusicManager para iniciar o método SomErro
-
 
         }
         if (other.gameObject.CompareTag("TriggerInicio"))

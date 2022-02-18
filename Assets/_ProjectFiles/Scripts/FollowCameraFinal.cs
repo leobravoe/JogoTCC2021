@@ -51,7 +51,7 @@ public class FollowCameraFinal : MonoBehaviour
         OriginalRot = transform.rotation;
 
         ShakeIntensity = 1.6f;
-        ShakeDecay = 0.02f;
+        ShakeDecay = 0.07f;
         Shaking = true;
     } 
 }

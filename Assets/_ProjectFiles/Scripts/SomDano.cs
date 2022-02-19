@@ -13,8 +13,12 @@ public class SomDano : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    void onTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        audio.PlayOneShot(som, volume);
+        if (other.gameObject.tag == "Player")
+        {
+            audio.PlayOneShot(som, volume);
+            Debug.Log("Colisão");
+        }
     }
 }

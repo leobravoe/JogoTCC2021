@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: "Assets/_ProjectFiles/Scenes/Tela de In\xEDcio/TelaDeInicio.unity"
-    guid: 6cec155a216ebea4db807c8542a400f5
+    path: Assets/_ProjectFiles/Scenes/Menu Inicial/Menu.unity
+    guid: 3a9c1d21ce98c654caed5c78a1f7c436
+  - enabled: 1
+    path: Assets/_ProjectFiles/Scenes/Tela Escolha Musica/TelaEscolhaMusica.unity
+    guid: 43649232635bece4c95bf49462da3d98
   - enabled: 1
     path: "Assets/_ProjectFiles/Scenes/Cen\xE1rios do Jogo/Interlagos.unity"
     guid: 2cadb7dab7c6d57448a69c5217b36fed

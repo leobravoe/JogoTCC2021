@@ -18,6 +18,13 @@ public class Menu : MonoBehaviour
         
     }
 
+    public void iniciarTelaMusica()
+    {
+        if (GameObject.Find("MusicaSelecionada"))
+            Destroy(GameObject.Find("MusicaSelecionada"));
+        SceneManager.LoadScene("TelaEscolhaMusica");
+    }
+
     public void iniciar()
     {
         SceneManager.LoadScene("Interlagos");
@@ -26,9 +33,9 @@ public class Menu : MonoBehaviour
     public void sair()
     {
         //No Edtior
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
 
         //No Jogo
-        // Application.Quit();
+        Application.Quit();
     }
 }

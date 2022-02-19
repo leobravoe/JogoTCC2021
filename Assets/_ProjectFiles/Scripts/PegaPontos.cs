@@ -8,11 +8,16 @@ public class PegaPontos : MonoBehaviour
 
     public GameObject scoreText;
     public int score;
+    AudioSource audio;
+    public AudioClip som;
+    public float volume;
+
+    public GameObject successParticle;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +32,7 @@ public class PegaPontos : MonoBehaviour
             score += 1;
             scoreText.GetComponent<Text>().text= "x" + score;
             Destroy(other.gameObject);
+            Destroy(Instantiate(successParticle, transform.position, transform.rotation),1);
         }
 
         if (other.gameObject.CompareTag("Obstaculo"))
@@ -39,10 +45,13 @@ public class PegaPontos : MonoBehaviour
             {
                 score -= 10;
             }
-                scoreText.GetComponent<Text>().text = "x" + score;
-                Destroy(other.gameObject);
 
-                GameObject.Find("Main Camera").SendMessage("DoShake"); //Manda uma mensagem para a MainCamera para iniciar o método DoShake
+            scoreText.GetComponent<Text>().text = "x" + score;
+            Destroy(other.gameObject);
+
+            GameObject.Find("Main Camera").SendMessage("DoShake"); //Manda uma mensagem para a MainCamera para iniciar o método DoShake
+            audio.PlayOneShot(som, volume);
+            Debug.Log("Colisão");
 
         }
         if (other.gameObject.CompareTag("TriggerInicio"))

@@ -10,7 +10,7 @@ public class MoveToNext : MonoBehaviour
     {
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         // Se existir um NavMeshAgent dentro do objeto que colidiu
         if (other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>())

@@ -43,7 +43,9 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            www = UnityWebRequestMultimedia.GetAudioClip("https://ytop1.net/pt/Thankyou?token=U2FsdGVkX18yYyY%2fhIaGARbrDF7GG0w6M9pgOmViyDzMIzYvuwDKOPlcgjGhMufpHfl9rsPCJlQahnLA%2fUjYce%2f09tts8TINNeFRgqliHSzK8KMEukY1APTyD79ciXyjq35L7ALxYeX1AKzb5TYIRfUdsJfrmjusIG5PNR%2f97kOLMXWNQ63E%2bVxK%2fH4%2fGd4L8uJykVNdY4gcPGpdm7IuaA%3d%3d&s=youtube&id=&h=6785987323857765821", AudioType.MPEG);
+            //https://ve37.aadika.xyz/download/0jgrCKhxE1s/mp3/128/1645488662/6c0a22be3a0be5762bbbdaca1c4937cbf27ee5f50305d5df01cc2ae2a5d97c42/1?f=X2Download.com
+            //https://ytop1.net/pt/Thankyou?token=U2FsdGVkX18yYyY%2fhIaGARbrDF7GG0w6M9pgOmViyDzMIzYvuwDKOPlcgjGhMufpHfl9rsPCJlQahnLA%2fUjYce%2f09tts8TINNeFRgqliHSzK8KMEukY1APTyD79ciXyjq35L7ALxYeX1AKzb5TYIRfUdsJfrmjusIG5PNR%2f97kOLMXWNQ63E%2bVxK%2fH4%2fGd4L8uJykVNdY4gcPGpdm7IuaA%3d%3d&s=youtube&id=&h=6785987323857765821
+            www = UnityWebRequestMultimedia.GetAudioClip("https://srv2.onlymp3.to/download?file=c92e81f1127364d12aa889a61a87e5ff251003003&token=RkEW1RUdgc4cgQD6suhwrg&expires=1645501108034&s=5ClAtk0sYytog2Fgzme5qQ", AudioType.MPEG);
         }
         
         using (www)

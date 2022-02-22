@@ -13,6 +13,7 @@ public class PegaPontos : MonoBehaviour
     public float volume;
 
     public GameObject successParticle;
+    public GameObject errorParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class PegaPontos : MonoBehaviour
 
             scoreText.GetComponent<Text>().text = "x" + score;
             Destroy(other.gameObject);
+            Destroy(Instantiate(errorParticle, transform.position, transform.rotation), 1);
 
             GameObject.Find("Main Camera").SendMessage("DoShake"); //Manda uma mensagem para a MainCamera para iniciar o método DoShake
             audio.PlayOneShot(som, volume);

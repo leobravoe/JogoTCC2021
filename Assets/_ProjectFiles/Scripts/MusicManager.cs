@@ -19,6 +19,7 @@ public class MusicManager : MonoBehaviour
     AudioSource audioSourceFantasma;
     AudioClip myClipFantasma;
     public GameObject CanvasErroMusica;
+    public AudioClip defaultSong;
 
     // Start is called before the first frame update
     void Start()
@@ -36,47 +37,62 @@ public class MusicManager : MonoBehaviour
 
     IEnumerator GetAudioClip() //Pega a URL da música, faz download e toca dentro do jogo, tocando como AudioSource
     {
-        UnityWebRequest www;
-        if (GameObject.Find("MusicaSelecionada"))
+
+        if (GameObject.Find("MusicaSelecionada").GetComponent<MusicaSelecionada>().EnderecoMusica == "https://coloque-o-link-aqui.com.br")
         {
-            www = UnityWebRequestMultimedia.GetAudioClip(GameObject.Find("MusicaSelecionada").GetComponent<MusicaSelecionada>().EnderecoMusica, AudioType.MPEG);
+            myClipFantasma = defaultSong;
+            audioSourceFantasma.clip = myClipFantasma;
+            player.GetComponent<AudioSource>().clip = myClipFantasma;
+            audioSourceFantasma.Play();
+            player.GetComponent<AudioSource>().Stop();
+            Debug.Log("Tocando Musica no Fantasma...");
+
+            player.SetActive(true);
+            fantasma.SetActive(true);
         }
         else
         {
-            //https://ve37.aadika.xyz/download/0jgrCKhxE1s/mp3/128/1645488662/6c0a22be3a0be5762bbbdaca1c4937cbf27ee5f50305d5df01cc2ae2a5d97c42/1?f=X2Download.com
-            //https://ytop1.net/pt/Thankyou?token=U2FsdGVkX18yYyY%2fhIaGARbrDF7GG0w6M9pgOmViyDzMIzYvuwDKOPlcgjGhMufpHfl9rsPCJlQahnLA%2fUjYce%2f09tts8TINNeFRgqliHSzK8KMEukY1APTyD79ciXyjq35L7ALxYeX1AKzb5TYIRfUdsJfrmjusIG5PNR%2f97kOLMXWNQ63E%2bVxK%2fH4%2fGd4L8uJykVNdY4gcPGpdm7IuaA%3d%3d&s=youtube&id=&h=6785987323857765821
-            www = UnityWebRequestMultimedia.GetAudioClip("https://srv2.onlymp3.to/download?file=c92e81f1127364d12aa889a61a87e5ff251003003&token=RkEW1RUdgc4cgQD6suhwrg&expires=1645501108034&s=5ClAtk0sYytog2Fgzme5qQ", AudioType.MPEG);
-        }
-        
-        using (www)
-        {
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError)
+            UnityWebRequest www;
+            if (GameObject.Find("MusicaSelecionada"))
             {
-                Debug.Log(www.error);
-                CanvasErroMusica.SetActive(true);
+                www = UnityWebRequestMultimedia.GetAudioClip(GameObject.Find("MusicaSelecionada").GetComponent<MusicaSelecionada>().EnderecoMusica, AudioType.MPEG);
             }
             else
             {
-                myClipFantasma = DownloadHandlerAudioClip.GetContent(www);
-                audioSourceFantasma.clip = myClipFantasma;
-                if(audioSourceFantasma.clip.isReadyToPlay)
-                {
-                    player.GetComponent<AudioSource>().clip = myClipFantasma;
-                    audioSourceFantasma.Play();
-                    player.GetComponent<AudioSource>().Stop();
-                    Debug.Log("Tocando Musica no Fantasma...");
+                www = UnityWebRequestMultimedia.GetAudioClip("https://cdn02.mp3yt.link/download/zOILAZHf2pE/mp3/128/1645492590/c044b7d295c3bcd32387a0d59238896d218bb45f3178565ba8465907999ab8b5/1", AudioType.MPEG);
+            }
 
-                    player.SetActive(true);
-                    fantasma.SetActive(true);
+            using (www)
+            {
+                yield return www.SendWebRequest();
+
+                if (www.isNetworkError)
+                {
+                    Debug.Log(www.error);
+                    CanvasErroMusica.SetActive(true);
                 }
                 else
                 {
-                    CanvasErroMusica.SetActive(true);
+                    myClipFantasma = DownloadHandlerAudioClip.GetContent(www);
+                    audioSourceFantasma.clip = myClipFantasma;
+                    if (audioSourceFantasma.clip.isReadyToPlay)
+                    {
+                        player.GetComponent<AudioSource>().clip = myClipFantasma;
+                        audioSourceFantasma.Play();
+                        player.GetComponent<AudioSource>().Stop();
+                        Debug.Log("Tocando Musica no Fantasma...");
+
+                        player.SetActive(true);
+                        fantasma.SetActive(true);
+                    }
+                    else
+                    {
+                        CanvasErroMusica.SetActive(true);
+                    }
                 }
             }
-        }
+        }    
+            
     }
 
 
@@ -92,22 +108,14 @@ public class MusicManager : MonoBehaviour
             if (audioSourceFantasma.time >= myClipFantasma.length)
             {
                 audioSourceFantasma.mute = true;
+                Invoke("WinCodition", 5);
             }
         }
-        
-        
+    }
 
-        /*while (playerMusicManager.GetComponent<AudioSource>().pitch > pitchMin)
-        {
-            playerMusicManager.GetComponent<AudioSource>().pitch -= Time.deltaTime * pitchOriginal / tempoPraMudar;
-        }
-
-        while (playerMusicManager.GetComponent<AudioSource>().pitch == pitchOriginal)
-        {
-            playerMusicManager.GetComponent<AudioSource>().pitch += Time.deltaTime * pitchOriginal / tempoPraMudar;
-        }
-
-        mudando = false;*/
+    protected void WinCodition()
+    {
+        CanvasErroMusica.SetActive(true);
     }
 
     public float getFrequenciesDiapason(int start, int end, int mult)

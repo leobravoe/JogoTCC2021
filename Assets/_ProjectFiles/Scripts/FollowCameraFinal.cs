@@ -41,7 +41,17 @@ public class FollowCameraFinal : MonoBehaviour
             Shaking = false;
         }
 
-        transform.position = Vector3.SmoothDamp(transform.position, (target.position - target.forward * x_scale) + Vector3.up * y_scale, ref velocity, smoothTime);
+        RaycastHit hit;
+        int layerMask = 1 << 6; // Pista
+        //layerMask = ~layerMask;
+        //Castar um raio para baixo e verificar se está muito próximo de algo.
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask) && hit.distance <= 5)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, (target.position - target.forward * x_scale) + Vector3.up * (y_scale*1.3f), ref velocity, smoothTime);
+        }
+        else
+            transform.position = Vector3.SmoothDamp(transform.position, (target.position - target.forward * x_scale) + Vector3.up * y_scale, ref velocity, smoothTime);
         transform.LookAt(target);
     }
 

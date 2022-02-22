@@ -10,6 +10,9 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
     public GameObject ponto;
     public GameObject obstaculo;
 
+    public GameObject pontoSpawnParticle;
+    public GameObject obstaculoSpawnParticle;
+
     //public float delay = 1f;
 
     // Start is called before the first frame update
@@ -57,6 +60,7 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
         if (i == objetosEmVolta.Length)
         {
             Destroy(Instantiate(ponto, transform.position + new Vector3(0f, 1f, 0f), ponto.transform.rotation), 20);
+            Destroy(Instantiate(pontoSpawnParticle, transform.position, transform.rotation), 1);
         }
             
     }
@@ -74,6 +78,7 @@ public class Spawner : MonoBehaviour, AudioProcessor.AudioCallbacks
         if(i == objetosEmVolta.Length)
         {
             Destroy(Instantiate(obstaculo, transform.position + new Vector3(0f, 1f, 0f), transform.rotation), 20);
+            Destroy(Instantiate(obstaculoSpawnParticle, transform.position, transform.rotation), 1);
         }
             
     }
